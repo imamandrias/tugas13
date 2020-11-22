@@ -12,7 +12,7 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: Text('Mahasiswaku Apps'),
         backgroundColor: Colors.teal,
-        cen
+        centerTitle: true,
       ),
     );
   }
