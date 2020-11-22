@@ -26,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.teal,
         centerTitle: true,
       ),
+      backgroundColor: Colors.white,
       body: Form(
         key: _key,
         child: ListView(
