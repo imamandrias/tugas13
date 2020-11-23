@@ -216,6 +216,18 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
             ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0),
+              child: MaterialButton(
+                color: Colors.teal,
+                textColor: Colors.white,
+                child: Text('Register'),
+                onPressed: () {
+                  //check();
+                  //setState(() {});
+                },
+              ),
+            ),
           ],
         ),
       ),
