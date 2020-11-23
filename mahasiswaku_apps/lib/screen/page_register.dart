@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -10,10 +11,27 @@ class _RegisterPageState extends State<RegisterPage> {
   int value, umur;
   String nama, email, username, password, nomorhp, alamat;
   bool _secureText = true;
+  DateTime _datePicked;
 
   showHide() {
     setState(() {
       _secureText = !_secureText;
+    });
+  }
+
+  void _showDatePicker() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime(2007),
+            firstDate: DateTime(1999),
+            lastDate: DateTime(2007))
+        .then((value) {
+      if (value == null) {
+        return;
+      }
+      setState(() {
+        _datePicked = value;
+      });
     });
   }
 
@@ -30,7 +48,9 @@ class _RegisterPageState extends State<RegisterPage> {
         child: ListView(
           padding: EdgeInsets.all(5.0),
           children: [
-            SizedBox(height: 16.0,),
+            SizedBox(
+              height: 16.0,
+            ),
             Padding(
               padding: EdgeInsets.all(5.0),
               child: TextFormField(
@@ -49,6 +69,42 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(5.0),
+              child: Container(
+                height: 60,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        _datePicked == null
+                            ? 'Pilih Tanggal Lahir'
+                            : 'Tanggal ${DateFormat.yMd().format(_datePicked)}',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.green,
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(4, 6),
+                            blurRadius: 6,
+                            color: Colors.black45,
+                          )
+                        ],
+                      ),
+                      child: FlatButton(onPressed: ()=>_showDatePicker(), child: Text(
+                        'Pilih Tanggal', style: TextStyle(fontWeight: FontWeight.bold),
+                      )),
+                    )
+                  ],
                 ),
               ),
             ),
@@ -138,6 +194,28 @@ class _RegisterPageState extends State<RegisterPage> {
                     )),
               ),
             ),
+            Padding(
+              padding: EdgeInsets.all(5.0),
+              child: TextFormField(
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Silahkan Masukan Alamat Lengkap';
+                  }
+                  return null;
+                },
+                maxLines: 4,
+                onSaved: (value) => alamat = value,
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  prefixIcon: Icon(Icons.location_on),
+                  hintText: 'Alamat',
+                  labelText: 'Masukan Alamat',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -146,7 +224,8 @@ class _RegisterPageState extends State<RegisterPage> {
 }
 
 String validatePassword(String value) {
-  Pattern pattern = r'(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[.,?<>!@#\$&*~]).{8,}$';
+  Pattern pattern =
+      r'(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[.,?<>!@#\$&*~]).{8,}$';
   RegExp regex = new RegExp(pattern);
   if (!regex.hasMatch(value))
     return 'Min 8 karakter, setidaknya terdiri dari: \n - 1 huruf besar, \n - 1 huruf kecil \n - 1 nomor \n - 1 karakter seperti ( . , ?< > ! @ # & * ~ )';

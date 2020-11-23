@@ -15,6 +15,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     startTimer();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,13 +24,11 @@ class _SplashPageState extends State<SplashPage> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Color(0xFF009688),
-              gradient: LinearGradient(
-                colors: [Color(0xFF1DE9B6), Color(0xFF80D8FF)],
-                begin: Alignment.centerRight,
-                end: Alignment.centerLeft
-              )
-            ),
+                color: Color(0xFF009688),
+                gradient: LinearGradient(
+                    colors: [Color(0xFF1DE9B6), Color(0xFF80D8FF)],
+                    begin: Alignment.centerRight,
+                    end: Alignment.centerLeft)),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -48,10 +47,12 @@ class _SplashPageState extends State<SplashPage> {
               ),
               Text(
                 'Mahasiswaku Apps',
-                style: TextStyle(
-                  color: Colors.redAccent,
-                  fontSize: 28.0
-                ),
+                style: TextStyle(color: Colors.redAccent, fontSize: 28.0),
+              ),
+              Text(
+                'by Imam Andrias',
+                style: TextStyle(color: Colors.deepPurple),
+                textAlign: TextAlign.left,
               ),
             ],
           ),
@@ -59,15 +60,13 @@ class _SplashPageState extends State<SplashPage> {
       ),
     );
   }
-  Future<Timer> startTimer() async{
-    return Timer(
-        Duration(seconds: 3), onDone);
+
+  Future<Timer> startTimer() async {
+    return Timer(Duration(seconds: 3), onDone);
   }
-  void onDone(){
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-            builder: (context)=>LoginPage()
-        )
-    );
+
+  void onDone() {
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
   }
 }
