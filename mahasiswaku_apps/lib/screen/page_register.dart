@@ -12,6 +12,8 @@ class _RegisterPageState extends State<RegisterPage> {
   String nama, email, username, password, nomorhp, alamat;
   bool _secureText = true;
   DateTime _datePicked;
+  String pilihanFakultas = 'Ilmu Komputer';
+  String pilihanJurusan = 'Sistem Informasi';
 
   showHide() {
     setState(() {
@@ -100,9 +102,12 @@ class _RegisterPageState extends State<RegisterPage> {
                           )
                         ],
                       ),
-                      child: FlatButton(onPressed: ()=>_showDatePicker(), child: Text(
-                        'Pilih Tanggal', style: TextStyle(fontWeight: FontWeight.bold),
-                      )),
+                      child: FlatButton(
+                          onPressed: () => _showDatePicker(),
+                          child: Text(
+                            'Pilih Tanggal',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )),
                     )
                   ],
                 ),
@@ -214,6 +219,143 @@ class _RegisterPageState extends State<RegisterPage> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(5.0),
+              child: Column(
+                children: [
+                  Container(
+                    padding:
+                    EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                    height: 100,
+                    width: 400,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(4, 6),
+                          blurRadius: 6,
+                          color: Colors.black45,
+                        )
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              'Pilih Fakultas anda:',
+                              style: TextStyle(fontSize: 16),
+                              textAlign: TextAlign.left,
+                            ),
+                            SizedBox(
+                              height: 4.0,
+                            ),
+                            DropdownButton<String>(
+                              value: pilihanFakultas,
+                              icon: Icon(
+                                  Icons.arrow_drop_down_circle_outlined),
+                              iconSize: 26,
+                              elevation: 16,
+                              style: TextStyle(color: Colors.black87),
+                              underline: Container(
+                                height: 4,
+                                color: Colors.redAccent,
+                              ),
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  pilihanFakultas = newValue;
+                                });
+                              },
+                              items: <String>[
+                                'Ilmu Komputer',
+                                'Matematika',
+                                'Biologi',
+                                'Kedokteran'
+                              ].map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                      value: value, child: Text(value));
+                                },
+                              ).toList(),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(5.0),
+              child: Column(
+                children: [
+                  Container(
+                    padding:
+                    EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                    height: 100,
+                    width: 400,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(4, 6),
+                          blurRadius: 6,
+                          color: Colors.black45,
+                        )
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              'Pilih Jurusan anda:',
+                              style: TextStyle(fontSize: 16),
+                              textAlign: TextAlign.left,
+                            ),
+                            SizedBox(
+                              height: 4.0,
+                            ),
+                            DropdownButton<String>(
+                              value: pilihanJurusan,
+                              icon: Icon(
+                                  Icons.arrow_drop_down_circle_outlined),
+                              iconSize: 26,
+                              elevation: 16,
+                              style: TextStyle(color: Colors.black87),
+                              underline: Container(
+                                height: 4,
+                                color: Colors.redAccent,
+                              ),
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  pilihanJurusan = newValue;
+                                });
+                              },
+                              items: <String>[
+                                'Sistem Informasi',
+                                'Teknik Informatika',
+                                'Matematika Terapan',
+                                'Biologi',
+                                'Kedokteran Umum'
+                              ].map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                      value: value, child: Text(value));
+                                },
+                              ).toList(),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
             Padding(
