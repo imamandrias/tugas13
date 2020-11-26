@@ -77,7 +77,21 @@ class _RegisterPageState extends State<RegisterPage> {
             Padding(
               padding: EdgeInsets.all(5.0),
               child: Container(
-                height: 60,
+                padding:
+                EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                height: 70,
+                width: 400,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(4, 6),
+                      blurRadius: 6,
+                      color: Colors.black45,
+                    )
+                  ],
+                ),
                 child: Row(
                   children: [
                     Expanded(
