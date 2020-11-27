@@ -1,7 +1,7 @@
 class Mahasiswa{
   int id;
   String nama;
-  String tanggal_lahir;
+  String tgl_lahir;
   String email;
   String nomor_hp;
   String username;
@@ -10,7 +10,7 @@ class Mahasiswa{
   String fakultas;
   String jurusan;
 
-  Mahasiswa({this.id, this.nama, this.tanggal_lahir, this.email, this.nomor_hp,
+  Mahasiswa({this.id, this.nama, this.tgl_lahir, this.email, this.nomor_hp,
       this.username, this.password, this.alamat, this.fakultas, this.jurusan});
 
   Map<String, dynamic> toMap(){
@@ -19,7 +19,7 @@ class Mahasiswa{
       map['id'] = id;
     }
     map['nama'] = nama;
-    map['tanggal_lahir'] = tanggal_lahir;
+    map['tgl_lahir'] = tgl_lahir;
     map['email'] = email;
     map['nomor_hp'] = nomor_hp;
     map['username'] = username;
@@ -32,7 +32,7 @@ class Mahasiswa{
   Mahasiswa.fromMap(Map<String, dynamic> map){
     this.id = map['id'];
     this.nama = map['nama'];
-    this.tanggal_lahir = map['tanggal_lahir'];
+    this.tgl_lahir = map['tgl_lahir'];
     this.email = map['email'];
     this.nomor_hp = map['nomor_hp'];
     this.username = map['username'];

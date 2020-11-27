@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mahasiswaku_apps/database/db_helper.dart';
+import 'package:mahasiswaku_apps/model/model_mahasiswa.dart';
+import 'package:mahasiswaku_apps/screen/page_login.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -7,6 +10,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  DbHelper db = DbHelper();
   final _key = new GlobalKey<FormState>();
   int value, umur;
   String nama, email, username, password, nomorhp, alamat;
@@ -77,8 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
             Padding(
               padding: EdgeInsets.all(5.0),
               child: Container(
-                padding:
-                EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
                 height: 70,
                 width: 400,
                 decoration: BoxDecoration(
@@ -240,8 +243,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 children: [
                   Container(
-                    padding:
-                    EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
                     height: 100,
                     width: 400,
                     decoration: BoxDecoration(
@@ -269,8 +271,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             DropdownButton<String>(
                               value: pilihanFakultas,
-                              icon: Icon(
-                                  Icons.arrow_drop_down_circle_outlined),
+                              icon: Icon(Icons.arrow_drop_down_circle_outlined),
                               iconSize: 26,
                               elevation: 16,
                               style: TextStyle(color: Colors.black87),
@@ -289,7 +290,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 'Biologi',
                                 'Kedokteran'
                               ].map<DropdownMenuItem<String>>(
-                                    (String value) {
+                                (String value) {
                                   return DropdownMenuItem<String>(
                                       value: value, child: Text(value));
                                 },
@@ -308,8 +309,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 children: [
                   Container(
-                    padding:
-                    EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
                     height: 100,
                     width: 400,
                     decoration: BoxDecoration(
@@ -337,8 +337,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             DropdownButton<String>(
                               value: pilihanJurusan,
-                              icon: Icon(
-                                  Icons.arrow_drop_down_circle_outlined),
+                              icon: Icon(Icons.arrow_drop_down_circle_outlined),
                               iconSize: 26,
                               elevation: 16,
                               style: TextStyle(color: Colors.black87),
@@ -358,7 +357,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 'Biologi',
                                 'Kedokteran Umum'
                               ].map<DropdownMenuItem<String>>(
-                                    (String value) {
+                                (String value) {
                                   return DropdownMenuItem<String>(
                                       value: value, child: Text(value));
                                 },
@@ -379,6 +378,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 textColor: Colors.white,
                 child: Text('Register'),
                 onPressed: () {
+                  inputMahasiswa();
                   //check();
                   //setState(() {});
                 },
@@ -386,6 +386,25 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Future<void> inputMahasiswa() async {
+    await db.simpanMahasiswa(Mahasiswa(
+        nama: nama,
+        tgl_lahir: _datePicked.toString(),
+        email: email,
+        nomor_hp: nomorhp,
+        username: username,
+        password: password,
+        alamat: alamat,
+        fakultas: pilihanFakultas,
+        jurusan: pilihanJurusan));
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LoginPage(),
       ),
     );
   }
